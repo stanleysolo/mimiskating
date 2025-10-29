@@ -34,7 +34,7 @@ function ScrollProgress() {
   const width = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   return (
     <motion.div
-      className="fixed top-0 left-0 h-1.5 bg-cyan-300/90 z-[60]"
+      className="fixed top-0 left-0 h-1.5 bg-pink-300/90 z-[60]"
       style={{ width }}
     />
   );
@@ -51,7 +51,7 @@ function BackToTop() {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-6 right-6 z-[70] rounded-2xl bg-white/90 shadow-lg px-4 py-2 text-slate-800 hover:bg-white"
+      className="fixed bottom-6 right-6 z-[70] rounded-2xl bg-white/90 shadow-lg px-4 py-2 text-slate-800 hover:bg-pink"
     >
       Back to top
     </button>
@@ -64,10 +64,10 @@ function ParallaxLayer({
   darken = 0.45,
   contrast = 1.1,
   blurPx = 0,
-  strength = 30,
+  strength = 5,
 }) {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 1000], ["0vh", `-${strength}vh`]);
+  const y = useTransform(scrollY, [0, 10000], ["0vh", `-${strength}vh`]);
 
   return (
     <motion.div
@@ -76,7 +76,7 @@ function ParallaxLayer({
       style={{ y }}
     >
       <div
-        className="absolute left-0 right-0 top-[-20vh] h-[140vh] bg-cover bg-center bg-no-repeat bg-size-cover"
+        className="absolute left-0 right-0 top-[-20vh] h-[140vh] bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url(${img})`,
           filter: `brightness(${1 - darken}) contrast(${contrast}) blur(${blurPx}px)`,
@@ -358,7 +358,7 @@ export default function App() {
         <div className="overflow-hidden rounded-3xl ring-1 ring-white/15">
           <motion.div
             className="flex gap-4 p-4"
-            animate={{ x: ["0%", "-200%"] }}
+            animate={{ x: ["0%", "-50%"] }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
           >
             {[...GALLERY, ...GALLERY].map((src, i) => (
