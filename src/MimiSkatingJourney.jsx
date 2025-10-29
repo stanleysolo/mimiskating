@@ -29,37 +29,34 @@ function usePreloadedImage(src) {
 }
 
 /* BACKGROUND */
-function ParallaxLayer({ speed = 0.1, opacity = 1, z = 0, img, gradient }) {
+function ParallaxLayer({ img, img2, blend = "overlay", speed = 0.05 }) {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, (v) => v * speed * -1);
-
-  // Infinite animation for looping background movement
-  const [offset, setOffset] = useState(0);
-  useEffect(() => {
-    let frame;
-    const animate = () => {
-      setOffset((prev) => (prev + 0.02) % 100); // tweak speed here
-      frame = requestAnimationFrame(animate);
-    };
-    frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
-  }, []);
 
   return (
     <motion.div
       aria-hidden
-      style={{ y, zIndex: z, opacity }}
-      className="pointer-events-none fixed inset-0 overflow-hidden"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      style={{ y }}
     >
-      {img && (
+      {/* Base image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${img})`,
+          backgroundSize: "cover",
+          filter: "brightness(0.6)",
+        }}
+      />
+      {/* Blended overlay image */}
+      {img2 && (
         <div
-          className="absolute inset-0 bg-center"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${img})`,
-            backgroundSize: "100%",  // zooms the image slightly larger
-            backgroundRepeat: "repeat-y",
-            filter: "brightness(0.6) contrast(1.05)",
-            height: "1000vh", // makes sure it extends beyond the viewport
+            backgroundImage: `url(${img2})`,
+            backgroundBlendMode: blend,
+            opacity: 0.5, // adjust intensity
+            backgroundSize: "cover",
           }}
         />
       )}
@@ -190,7 +187,7 @@ const MILESTONES = [
     title: "First Figure Skating Competition",
     copy: "Her first time performing in front of a crowd at the Bowie ISI Valentines Invitational 2023.",
     images: ["/photos/firstcomp.jpg", "/photos/firstcomp2.jpg"],
-      },
+  },
   {
     year: "2025",
     title: "First Axel",
@@ -223,7 +220,13 @@ export default function MimiSkatingJourney() {
 
   return (
     <main className="relative min-h-screen text-white">
-      <ParallaxLayer speed={0.05} img={THEME.bgImage} darken={THEME.bgDarken} contrast={THEME.bgContrast} blurPx={THEME.bgBlurPx} />
+      <div className="fixed inset-0 -z-20 bg-[#0b1220]" />
+      <ParallaxLayer
+        img="/photos/mimi-bg.jpg"
+        img2="/photos/mimi-bg2.png"
+        blend="screen"  // overlay, multiply, screen, soft-light, etc.
+        speed={0.06}
+      />      
       <SnowOverlay count={THEME.snowflakes} speedBase={THEME.snowSpeedBase} />
       <ScrollProgress />
 
