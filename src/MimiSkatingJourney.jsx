@@ -29,21 +29,40 @@ function usePreloadedImage(src) {
 }
 
 /* BACKGROUND */
-function ParallaxLayer({ speed = 0.05, img, darken = 0.4, contrast = 1.1, blurPx = 0 }) {
+function ParallaxLayer({ speed = 0.1, opacity = 1, z = 0, img, gradient }) {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, (v) => v * speed * -1);
-  const status = usePreloadedImage(img);
+
+  // Infinite animation for looping background movement
+  const [offset, setOffset] = useState(0);
+  useEffect(() => {
+    let frame;
+    const animate = () => {
+      setOffset((prev) => (prev + 0.02) % 100); // tweak speed here
+      frame = requestAnimationFrame(animate);
+    };
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   return (
-    <motion.div aria-hidden className="pointer-events-none fixed inset-0 z-0" style={{ y }}>
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${img})`,
-          filter: `brightness(${1 - darken}) contrast(${contrast}) blur(${blurPx}px)`,
-        }}
-      />
-      {status === "error" && <div className="absolute inset-0 bg-slate-900" />}
+    <motion.div
+      aria-hidden
+      style={{ y, zIndex: z, opacity }}
+      className="pointer-events-none fixed inset-0 overflow-hidden"
+    >
+      {img && (
+        <div
+          className="absolute inset-0 bg-center"
+          style={{
+            backgroundImage: `url(${img})`,
+            backgroundSize: "100%",  // zooms the image slightly larger
+            backgroundRepeat: "repeat-y",
+            filter: "brightness(0.6) contrast(1.05)",
+            height: "1000vh", // makes sure it extends beyond the viewport
+          }}
+        />
+      )}
     </motion.div>
   );
 }
@@ -171,13 +190,18 @@ const MILESTONES = [
     title: "First Figure Skating Competition",
     copy: "Her first time performing in front of a crowd at the Bowie ISI Valentines Invitational 2023.",
     images: ["/photos/firstcomp.jpg", "/photos/firstcomp2.jpg"],
-    videos: ["/videos/firstcomp.mp4"],
+      },
+  {
+    year: "2025",
+    title: "First Axel",
+    copy: "After lots of attempts and falls, I LANDED MY FIRST AXEL.",
+    videos: ["/videos/firstaxel.mp4"],
   },
   {
     year: "2025",
-    title: "Program with Personality",
-    copy: "A radiant performance that proved her confidence and joy.",
-    images: ["/photos/program.jpg"],
+    title: "First Double Salchow",
+    copy: "Not even two days after landing my Axel, I landed my double Salchow.",
+    videos: ["/videos/firstdoublesalchow.mp4"],
   },
 ];
 
@@ -296,10 +320,23 @@ export default function MimiSkatingJourney() {
       </Section>
 
       {/* Gratitude */}
-      <Section id="gratitude" eyebrow="Finale" title="Gratitude" subtitle="Coaches, teammates, rink staff, family, and friends—thank you.">
+      <Section id="gratitude" eyebrow="Finale" title="Gratitude">
+        <p className="max-w-3xl mx-auto text-white/85 text-center">
+          “Thank you to the coaches and staff of the Bowie Ice Arena for making me fall in love with figure skating.”
+        </p>
+        <br></br>
+        <p className="max-w-3xl mx-auto text-white/85 text-center">
+          “Thank you to Coach Greg and the Coaches of the Gardens Sports Academy for refining my skating technique and skill, pushing my further along my journey.”
+        </p>
+        <br></br>
+        <p className="max-w-3xl mx-auto text-white/85 text-center">
+          “A huge thank you to Coach Anna Prikockis and Coach Rashid Kadyrkaev for all the countless hours you have put in making me an advanced skater, making me get my first Axel and several doubles.”
+        </p>
+        <br></br>
         <p className="max-w-3xl mx-auto text-white/85 text-center">
           “Great skating is steady work. Mimi brings curiosity to each rep—and that is where breakthroughs live.”
         </p>
+
       </Section>
 
       <footer className="relative border-t border-white/10 py-10 text-center text-white/70 z-[3]">
