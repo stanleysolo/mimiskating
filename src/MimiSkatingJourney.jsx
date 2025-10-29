@@ -215,7 +215,7 @@ const GALLERY = [
   "/photos/firstlesson.jpg",
   "/photos/firstcomp.jpg",
   "/photos/firstcomp2.jpg",
-  "/photos/program.jpg",
+  "/photos/bio.jpg",
 ];
 
 /* ============== Main App ============== */
