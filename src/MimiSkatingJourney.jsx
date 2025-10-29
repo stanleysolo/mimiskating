@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Sparkles, Calendar, Snowflake, ChevronDown } from "lucide-react";
+import { Sparkles, Calendar, Snowflake, ChevronDown, Instagram, ShoppingBag } from "lucide-react";
 
 /* ============== Snow Overlay ============== */
 function SnowOverlay({ count = 60, speedBase = 14 }) {
@@ -359,35 +359,35 @@ export default function App() {
       </Section>
 
       <Section
-  id="gallery"
-  eyebrow="Chapter 4"
-  title="Gallery"
-  subtitle="Favorite skating moments"
->
-  <div className="overflow-hidden rounded-3xl ring-1 ring-white/15">
-    <motion.div
-      className="flex gap-4 p-4"
-      animate={{ x: ["0%", "-200%"] }}
-      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-    >
-      {[...GALLERY, ...GALLERY].map((src, i) => (
-        <a
-          key={i}
-          href={src}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="h-56 w-96 flex-none rounded-2xl overflow-hidden hover:scale-[1.03] transition-transform duration-200"
-        >
-          <img
-            src={src}
-            alt={`Gallery ${i + 1}`}
-            className="w-full h-full object-cover"
-          />
-        </a>
-      ))}
-    </motion.div>
-  </div>
-</Section>
+        id="gallery"
+        eyebrow="Chapter 4"
+        title="Gallery"
+        subtitle="Favorite skating moments"
+      >
+        <div className="overflow-hidden rounded-3xl ring-1 ring-white/15">
+          <motion.div
+            className="flex gap-4 p-4"
+            animate={{ x: ["0%", "-200%"] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          >
+            {[...GALLERY, ...GALLERY].map((src, i) => (
+              <a
+                key={i}
+                href={src}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-56 w-96 flex-none rounded-2xl overflow-hidden hover:scale-[1.03] transition-transform duration-200"
+              >
+                <img
+                  src={src}
+                  alt={`Gallery ${i + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </a>
+            ))}
+          </motion.div>
+        </div>
+      </Section>
 
 
       <Section id="gratitude" eyebrow="Finale" title="Gratitude">
@@ -409,10 +409,34 @@ export default function App() {
       </Section>
 
       <footer className="relative border-t border-white/10 py-10 text-center text-white/70 z-[3]">
-        <p className="text-sm">
+        <p className="text-sm mb-6">
           © {currentYear} Helowicz Family • Built with love and a lot of rink time.
         </p>
+
+        <div className="flex justify-center gap-8">
+          <a
+            href="https://www.instagram.com/mimi.on.ice/?hl=en"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 hover:text-pink-400 transition"
+          >
+            <Instagram className="w-8 h-8" />
+            <span className="text-lg">@mimi.on.ice</span>
+          </a>
+
+          <a
+            href="https://www.amazon.com/hz/wishlist/ls/3MW5LZ8I0Z7P2?ref_=wl_share"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 hover:text-yellow-400 transition"
+          >
+            <ShoppingBag className="w-8 h-8" />
+            <span className="text-lg">Amazon Wishlist</span>
+          </a>
+        </div>
       </footer>
+
+
 
       <BackToTop />
     </main>
