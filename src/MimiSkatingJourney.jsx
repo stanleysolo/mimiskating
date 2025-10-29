@@ -125,6 +125,7 @@ function Countdown() {
     const id = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(id);
   }, []);
+
   const diff = OLYMPICS_START - now;
   if (diff <= 0)
     return <p className="text-center text-white">It’s here—let the Games begin!</p>;
@@ -136,8 +137,16 @@ function Countdown() {
   const seconds = Math.floor((diff / 1000) % 60);
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="inline-grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-4">
+    <div className="flex flex-col md:flex-row items-center justify-center text-center md:space-x-12 space-y-6 md:space-y-0">
+      {/* Logo on the left */}
+      <img
+        src="/photos/Salt-lake-white.png"
+        alt="Salt Lake 2034 Winter Olympics Logo"
+        className="w-40 md:w-48 lg:w-56 select-none"
+      />
+
+      {/* Countdown Grid */}
+      <div className="grid justify-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-4 font-sans">
         {[
           { label: "Years", value: years },
           { label: "Days", value: days },
@@ -149,10 +158,10 @@ function Countdown() {
             key={item.label}
             className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur-md p-4 min-w-[110px]"
           >
-            <div className="text-3xl font-extrabold text-cyan-200 text-center tabular-nums">
+            <div className="text-3xl font-extrabold text-cyan-200 tabular-nums font-heading">
               {item.value}
             </div>
-            <div className="mt-1 text-center text-xs uppercase tracking-widest text-white/70">
+            <div className="mt-1 text-xs uppercase tracking-widest text-white/70 font-sans">
               {item.label}
             </div>
           </div>
@@ -161,6 +170,7 @@ function Countdown() {
     </div>
   );
 }
+
 
 /* ============== Data ============== */
 const MILESTONES = [
@@ -293,9 +303,8 @@ export default function App() {
           {MILESTONES.map((m, i) => (
             <div
               key={`${m.year}-${i}`}
-              className={`grid md:grid-cols-2 gap-8 items-center ${
-                i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
-              }`}
+              className={`grid md:grid-cols-2 gap-8 items-center ${i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
+                }`}
             >
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs text-white/80 ring-1 ring-white/15">
@@ -350,28 +359,36 @@ export default function App() {
       </Section>
 
       <Section
-        id="gallery"
-        eyebrow="Chapter 4"
-        title="Gallery"
-        subtitle="Favorite skating moments"
-      >
-        <div className="overflow-hidden rounded-3xl ring-1 ring-white/15">
-          <motion.div
-            className="flex gap-4 p-4"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          >
-            {[...GALLERY, ...GALLERY].map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={`Gallery ${i + 1}`}
-                className="h-56 w-96 flex-none rounded-2xl object-cover"
-              />
-            ))}
-          </motion.div>
-        </div>
-      </Section>
+  id="gallery"
+  eyebrow="Chapter 4"
+  title="Gallery"
+  subtitle="Favorite skating moments"
+>
+  <div className="overflow-hidden rounded-3xl ring-1 ring-white/15">
+    <motion.div
+      className="flex gap-4 p-4"
+      animate={{ x: ["0%", "-200%"] }}
+      transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+    >
+      {[...GALLERY, ...GALLERY].map((src, i) => (
+        <a
+          key={i}
+          href={src}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="h-56 w-96 flex-none rounded-2xl overflow-hidden hover:scale-[1.03] transition-transform duration-200"
+        >
+          <img
+            src={src}
+            alt={`Gallery ${i + 1}`}
+            className="w-full h-full object-cover"
+          />
+        </a>
+      ))}
+    </motion.div>
+  </div>
+</Section>
+
 
       <Section id="gratitude" eyebrow="Finale" title="Gratitude">
         <p className="max-w-3xl mx-auto text-white/85 text-center">
