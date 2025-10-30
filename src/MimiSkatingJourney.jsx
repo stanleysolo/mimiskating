@@ -3,27 +3,49 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Sparkles, Calendar, Snowflake, ChevronDown, Instagram, ShoppingBag } from "lucide-react";
 
 /* ============== Snow Overlay ============== */
-function SnowOverlay({ count = 60, speedBase = 14 }) {
+/* ❄️ Improved Snow Overlay (more random + drifting) */
+function SnowOverlay({ count = 80, speedBase = 10 }) {
   const flakes = Array.from({ length: count });
+
   return (
     <div className="pointer-events-none fixed inset-0 overflow-hidden z-[2]">
-      {flakes.map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: [-20, 120], opacity: [0, 1, 0] }}
-          transition={{
-            duration: speedBase + (i % 6),
-            repeat: Infinity,
-            delay: i * 0.1,
-            ease: "linear",
-          }}
-          className="absolute text-white/80"
-          style={{ left: `${(i * 15) % 100}%` }}
-        >
-          <Snowflake className="w-4 h-4" />
-        </motion.div>
-      ))}
+      {flakes.map((_, i) => {
+        const size = 2 + Math.random() * 4; // 2–6px
+        const startX = Math.random() * 100; // random horizontal start
+        const drift = Math.random() * 30 - 15; // left/right drift
+        const fallTime = speedBase + Math.random() * 10; // variable speed
+        const delay = Math.random() * 5; // stagger start
+        const opacity = 0.4 + Math.random() * 0.6; // varied brightness
+
+        return (
+          <motion.div
+            key={i}
+            initial={{ y: -20, x: startX, opacity: 0 }}
+            animate={{
+              y: ["-5%", "110%"],
+              x: [`${startX}%`, `${startX + drift}%`],
+              opacity: [0, opacity, 0],
+            }}
+            transition={{
+              duration: fallTime,
+              repeat: Infinity,
+              delay,
+              ease: "linear",
+            }}
+            className="absolute"
+          >
+            <Snowflake
+              className="text-white"
+              style={{
+                width: `${size}px`,
+                height: `${size}px`,
+                opacity,
+                filter: "drop-shadow(0 0 4px rgba(255,255,255,0.4))",
+              }}
+            />
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
@@ -174,19 +196,22 @@ function Countdown() {
 
 /* ============== Data ============== */
 const MILESTONES = [
+
+
+
+
   {
-    year: "2022",
-    title: "First Steps on Ice",
+    year: "2025",
+    title: "First Double Salchow",
     copy:
-      "Mimi first glided across the ice and felt her dream begin at the Columbia Ice Rink in Maryland.",
-    images: ["/photos/firsttimeonice.JPG"],
+      "Not even two days after landing my Axel, I landed my double Salchow.",
+    videos: ["/videos/firstdoublesalchow.mp4"],
   },
   {
-    year: "2022",
-    title: "First Skating Lesson",
-    copy:
-      "She took her first skating lesson at the Bowie Ice Arena in Maryland.",
-    images: ["/photos/firstlesson.jpg"],
+    year: "2025",
+    title: "First Axel",
+    copy: "After lots of attempts and falls, I LANDED MY FIRST AXEL.",
+    videos: ["/videos/firstaxel.mp4"],
   },
   {
     year: "2023",
@@ -196,17 +221,18 @@ const MILESTONES = [
     images: ["/photos/firstcomp.jpg", "/photos/firstcomp2.jpg"],
   },
   {
-    year: "2025",
-    title: "First Axel",
-    copy: "After lots of attempts and falls, I LANDED MY FIRST AXEL.",
-    videos: ["/videos/firstaxel.mp4"],
+    year: "2022",
+    title: "First Skating Lesson",
+    copy:
+      "She took her first skating lesson at the Bowie Ice Arena in Maryland.",
+    images: ["/photos/firstlesson.jpg"],
   },
   {
-    year: "2025",
-    title: "First Double Salchow",
+    year: "2022",
+    title: "First Steps on Ice",
     copy:
-      "Not even two days after landing my Axel, I landed my double Salchow.",
-    videos: ["/videos/firstdoublesalchow.mp4"],
+      "Mimi first glided across the ice and felt her dream begin at the Columbia Ice Rink in Maryland.",
+    images: ["/photos/firsttimeonice.JPG"],
   },
 ];
 
@@ -392,15 +418,15 @@ export default function App() {
 
       <Section id="gratitude" eyebrow="Finale" title="Gratitude">
         <p className="max-w-3xl mx-auto text-white/85 text-center">
-          “Thank you to the coaches and staff of the Bowie Ice Arena for making me fall in love with figure skating.”
+          “Thank you to the coaches and staff of the Bowie Ice Arena for making Mimi fall in love with figure skating.”
         </p>
         <br />
         <p className="max-w-3xl mx-auto text-white/85 text-center">
-          “Thank you to Coach Greg and the Coaches of the Gardens Sports Academy for refining my skating technique and skill, pushing my further along my journey.”
+          “Thank you to Coach Greg and the Coaches of the Gardens Sports Academy for refining Mimi's skating technique and skill, pushing her further along her journey.”
         </p>
         <br />
         <p className="max-w-3xl mx-auto text-white/85 text-center">
-          “A huge thank you to Coach Anna Prikockis and Coach Rashid Kadyrkaev for all the countless hours you have put in making me an advanced skater, making me get my first Axel and several doubles.”
+          “A huge thank you to Coach Anna Prikockis and Coach Rashid Kadyrkaev for all the countless hours you have put in making Mimi an advanced skater, making me get my first Axel and several doubles.”
         </p>
         <br />
         <p className="max-w-3xl mx-auto text-white/85 text-center">
