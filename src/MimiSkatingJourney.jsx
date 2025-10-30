@@ -2,45 +2,39 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Sparkles, Calendar, Snowflake, ChevronDown, Instagram, ShoppingBag } from "lucide-react";
 
-/* ============== Snow Overlay ============== */
-/* ❄️ Improved Snow Overlay (more random + drifting) */
-function SnowOverlay({ count = 80, speedBase = 10 }) {
-  const flakes = Array.from({ length: count });
-
+// ---------- SNOW OVERLAY (gentle drift + pink snowflakes) ----------
+function SnowOverlay() {
+  const flakes = Array.from({ length: 60 });
   return (
-    <div className="pointer-events-none fixed inset-0 overflow-hidden z-[2]">
+    <div className="pointer-events-none fixed inset-0 overflow-hidden z-[30]">
       {flakes.map((_, i) => {
-        const size = 2 + Math.random() * 4; // 2–6px
-        const startX = Math.random() * 100; // random horizontal start
-        const drift = Math.random() * 30 - 15; // left/right drift
-        const fallTime = speedBase + Math.random() * 10; // variable speed
-        const delay = Math.random() * 5; // stagger start
-        const opacity = 0.4 + Math.random() * 0.6; // varied brightness
+        const drift = Math.random() * 100 - 30; // horizontal sway
+        const duration = 14 + (i % 6);         // fall speed
+        const delay = i * 0.1;                 // stagger
 
         return (
           <motion.div
             key={i}
-            initial={{ y: -20, x: startX, opacity: 0 }}
+            initial={{ y: -20, opacity: 0, x: 0 }}
             animate={{
-              y: ["-5%", "110%"],
-              x: [`${startX}%`, `${startX + drift}%`],
-              opacity: [0, opacity, 0],
+              y: [-20, 120],
+              x: [0, drift, -drift, 0],
+              opacity: [0, 1, 0],
             }}
             transition={{
-              duration: fallTime,
+              duration,
               repeat: Infinity,
               delay,
               ease: "linear",
             }}
             className="absolute"
+            style={{ left: `${(i * 15) % 100}%` }}
           >
             <Snowflake
-              className="text-white"
+              className="w-4 h-4"
               style={{
-                width: `${size}px`,
-                height: `${size}px`,
-                opacity,
-                filter: "drop-shadow(0 0 4px rgba(255,255,255,0.4))",
+                color: `hsl(${330 + Math.random() * 10}, 80%, ${70 + Math.random() * 10}%)`,
+                filter: "drop-shadow(0 0 6px rgba(255, 105, 180, 0.5))",
               }}
             />
           </motion.div>
