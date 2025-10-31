@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Sparkles, Calendar, Snowflake, ChevronDown, Instagram, ShoppingBag } from "lucide-react";
+import { Sparkles, Calendar, Snowflake, ChevronDown, Award, Instagram, ShoppingBag, BadgeCheck } from "lucide-react";
 
 // ---------- SNOW OVERLAY (gentle drift + pink snowflakes) ----------
 function SnowOverlay() {
@@ -67,7 +67,7 @@ function BackToTop() {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-6 right-6 z-[70] rounded-2xl bg-white/90 shadow-lg px-4 py-2 text-slate-800 hover:bg-pink"
+      className="fixed bottom-6 right-6 z-[70] rounded-2xl bg-white/90 shadow-lg px-4 py-2 text-slate-800 hover:bg-pink-400"
     >
       Back to top
     </button>
@@ -312,10 +312,86 @@ export default function App() {
           breathe through the wobble, and chase that floating feeling only ice can give.
         </p>
       </Section>
+      {/* Current Qualifications */}
+      <Section
+        id="qualifications"
+        eyebrow="Chapter 2"
+        title="Current Qualifications"
+        subtitle={
+          <>
+            Progress to date across US Figure Skating, Learn to Skate USA, and ISI.
+            <br />
+            <span className="text-sm text-white/70 italic">
+              Last updated: {new Date().toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </span>
+          </>
+        }
+      >
+        <div className="grid gap-6 md:grid-cols-3">
+          {/* US Figure Skating */}
+          <div className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur-md">
+            <div className="flex items-center gap-3">
+              <Award className="w-6 h-6 text-cyan-300" />
+              <h4 className="text-xl font-semibold">US Figure Skating</h4>
+            </div>
+            <p className="mt-2 text-white/85">Skating Skills <span className="font-semibold">Pre-Bronze</span></p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="text-xs uppercase tracking-widest rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/15">
+                Skills
+              </span>
+              <span className="text-xs uppercase tracking-widest rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/15">
+                USFS
+              </span>
+            </div>
+          </div>
+
+          {/* Learn to Skate USA */}
+          <div className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur-md">
+            <div className="flex items-center gap-3">
+              <BadgeCheck className="w-6 h-6 text-emerald-300" />
+              <h4 className="text-xl font-semibold">Learn to Skate USA</h4>
+            </div>
+            <p className="mt-2 text-white/85">
+              <span className="font-semibold">Freeskate 6</span>
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="text-xs uppercase tracking-widest rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/15">
+                LTS
+              </span>
+              <span className="text-xs uppercase tracking-widest rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/15">
+                Freeskate
+              </span>
+            </div>
+          </div>
+
+          {/* ISI */}
+          <div className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 backdrop-blur-md">
+            <div className="flex items-center gap-3">
+              <Award className="w-6 h-6 text-pink-300" />
+              <h4 className="text-xl font-semibold">ISI</h4>
+            </div>
+            <p className="mt-2 text-white/85">
+              <span className="font-semibold">Freestyle 4</span>
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <span className="text-xs uppercase tracking-widest rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/15">
+                ISI
+              </span>
+              <span className="text-xs uppercase tracking-widest rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/15">
+                Freestyle
+              </span>
+            </div>
+          </div>
+        </div>
+      </Section>
 
       <Section
         id="milestones"
-        eyebrow="Chapter 2"
+        eyebrow="Chapter 3"
         title="Milestones"
         subtitle="Tiny steps, brave moments, and the smile that says: again."
       >
@@ -371,7 +447,7 @@ export default function App() {
 
       <Section
         id="olympic-goal"
-        eyebrow="Chapter 3"
+        eyebrow="Chapter 4"
         title="Goal: The 2034 Winter Olympics"
         subtitle="Salt Lake City, Utah • February 10–26, 2034"
       >
@@ -380,7 +456,7 @@ export default function App() {
 
       <Section
         id="gallery"
-        eyebrow="Chapter 4"
+        eyebrow="Chapter 5"
         title="Gallery"
         subtitle="Favorite skating moments"
       >
