@@ -208,6 +208,13 @@ const MILESTONES = [
     videos: ["/videos/firstaxel.mp4"],
   },
   {
+    year: "2024",
+    title: "Passed First US Figure Skating Test",
+    copy:
+      "Mimi passed her first US Figure Skating Test, Pre-Preliminary Skating Skills with the help of Coach Anna. This was start of pushing her to higher levels!",
+    images: ["/photos/firstusfstest.jpg"],
+  },
+  {
     year: "2023",
     title: "First Figure Skating Competition",
     copy:
