@@ -331,7 +331,7 @@ export default function App() {
           {/* Circular Bio Photo */}
           <div className="flex justify-center mb-8">
             <div className="relative w-64 h-64 md:w-96 md:h-96 overflow-hidden rounded-full ring-4 ring-white/40 shadow-2xl">
-              <img src="/photos/bio.jpg" alt="Emily 'Mimi' Helowicz portrait" className="w-full h-full object-cover" />
+              <img src="/photos/mimi-bio2.jpg" alt="Emily 'Mimi' Helowicz portrait" className="w-full h-full object-cover" />
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{ background: "radial-gradient(circle at center, rgba(255,255,255,0) 55%, rgba(15,23,42,0.9) 100%)", mixBlendMode: "overlay" }}
