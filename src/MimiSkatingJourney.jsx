@@ -422,7 +422,7 @@ export default function App() {
               <h4 className="text-xl font-semibold">ISI</h4>
             </div>
             <p className="mt-2 text-white/85">
-              <span className="font-semibold">Freestyle 4</span>
+              <span className="font-semibold">Freestyle 5</span>
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <span className="text-xs uppercase tracking-widest rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/15">
