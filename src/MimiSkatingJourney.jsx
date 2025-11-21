@@ -384,9 +384,15 @@ export default function App() {
               <h4 className="text-xl font-semibold">US Figure Skating</h4>
             </div>
             <p className="mt-2 text-white/85">
-              Skating Skills <span className="font-semibold">Pre-Bronze</span>
+              Skating Skills <span className="font-semibold">Bronze</span>
+            </p>
+            <p className="mt-2 text-white/85">
+              Singles <span className="font-semibold">Pre-Preliminary</span>
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
+              <span className="text-xs uppercase tracking-widest rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/15">
+                Singles
+              </span>
               <span className="text-xs uppercase tracking-widest rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/15">
                 Skills
               </span>
