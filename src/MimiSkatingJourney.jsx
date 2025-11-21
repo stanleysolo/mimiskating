@@ -169,6 +169,12 @@ function Countdown() {
  * MILESTONES (images/videos supported)
  * ========================= */
 const MILESTONES = [
+    {
+    year: "2025",
+    title: "First Singles Test",
+    copy: "Passed Bronze Skating Skills and Pre-Preliminary Singles, with honors, tests at US Figure Skating.",
+    images: ["/photos/firstsinglestest.jpg"],
+  },
   {
     year: "2025",
     title: "First Double Salchow",
